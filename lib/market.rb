@@ -16,4 +16,8 @@ class Market
   def vendor_names
     @vendors.map { |vendor| vendor.name  }
   end
+
+  def vendors_that_sell(item)
+    @vendors.select { |vendor| vendor.items_in_stock.include?(item.name) }
+  end
 end

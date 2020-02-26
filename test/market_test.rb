@@ -49,7 +49,7 @@ class MarketTest < Minitest::Test
     @market.add_vendor(@vendor1)
     @market.add_vendor(@vendor2)
     @market.add_vendor(@vendor3)
-    
+
     expected_names = [
                       "Rocky Mountain Fresh",
                       "Ba-Nom-a-Nom",
@@ -59,18 +59,24 @@ class MarketTest < Minitest::Test
     assert_equal  expected_names, @market.vendor_names
   end
 
+  def test_it_can_list_vendors_that_sell_item
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
+    assert_equal [@vendor1, @vendor3], @market.vendors_that_sell(@item1)
+  end
+
 
 end
 
 
-# pry(main)> market.vendor_names
-# #=> ["Rocky Mountain Fresh", "Ba-Nom-a-Nom", "Palisade Peach Shack"]
-#
+
 # pry(main)> market.vendors_that_sell(item1)
-# #=> [#<Vendor:0x00007fe1348a1160...>, #<Vendor:0x00007fe134910650...>]
+# #=> [#<VENDOR 1...>, #VENDOR 3...>]
 #
 # pry(main)> market.vendors_that_sell(item4)
-# #=> [#<Vendor:0x00007fe1349bed40...>]
+# #=> [#<VENDOR 2...>]
 #
 # pry(main)> vendor1.potential_revenue
 # #=> 29.75
@@ -89,7 +95,7 @@ end
 # #=> #<Market:0x00007fe134933e20...>
 
 # pry(main)> vendor1 = Vendor.new("Rocky Mountain Fresh")
-# #=> #<Vendor:0x00007fe1348a1160...>
+# #=> #<VENDOR 1...>
 #
 # pry(main)> item1 = Item.new({name: 'Peach', price: "$0.75"})
 # #=> #<Item:0x007f9c56740d48...>
@@ -108,13 +114,13 @@ end
 # pry(main)> vendor1.stock(item2, 7)
 #
 # pry(main)> vendor2 = Vendor.new("Ba-Nom-a-Nom")
-# #=> #<Vendor:0x00007fe1349bed40...>
+# #=> #<VENDOR 2...>
 #
 # pry(main)> vendor2.stock(item4, 50)
 #
 # pry(main)> vendor2.stock(item3, 25)
 #
 # pry(main)> vendor3 = Vendor.new("Palisade Peach Shack")
-# #=> #<Vendor:0x00007fe134910650...>
+# #=> #VENDOR 3...>
 #
 # pry(main)> vendor3.stock(item1, 65)
