@@ -20,4 +20,5 @@ class Market
   def vendors_that_sell(item)
     @vendors.select { |vendor| vendor.items_in_stock.include?(item.name) }
   end
+
 end
