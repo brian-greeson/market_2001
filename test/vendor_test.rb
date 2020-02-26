@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require "./lib/item"
+
 require "./lib/vendor"
 
 class VendorTest < Minitest::Test
