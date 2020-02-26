@@ -66,4 +66,104 @@ class MarketTest < Minitest::Test
     assert_equal [@vendor2], @market.vendors_that_sell(@item4)
   end
 
+  def test_it_lists_total_inventory
+    @vendor3.stock(@item3, 10)
+    expected_inventory = {
+                          @item1 => {
+                                    quantity: 100,
+                                    vendors: [@vendor1, @vendor3]
+                                    },
+                          @item2 => {
+                                    quantity: 7,
+                                    vendors: [@vendor1]
+                                    },
+                          @item4 => {
+                                    quantity: 50,
+                                    vendors: [@vendor2]
+                                    },
+                          @item3 => {
+                                    quantity: 35,
+                                    vendors: [@vendor2, @vendor3]
+                                    }
+                          }
+
+    assert_equal expected_inventory, @market.total_inventory
+  end
+
 end
+
+
+
+
+# pry(main).overstocked_items
+# #=> [#<item1...>]
+#
+# pry(main)> market.sorted_item_list
+# #=> ["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"]
+
+
+
+#
+# pry(main)> market = Market.new("South Pearl Street Farmers Market")
+# #=> #<Market:0x00007fe134933e20...>
+#
+# pry(main)> item1 = Item.new({name: 'Peach', price: "$0.75"})
+# #=> #<item1...>
+#
+# pry(main)> item2 = Item.new({name: 'Tomato', price: '$0.50'})
+# #=> #<item2...>
+#
+# pry(main)> item3 = Item.new({name: "Peach-Raspberry Nice Cream", price: "$5.30"})
+# #=> #<item3...>
+#
+# pry(main)> item4 = Item.new({name: "Banana Nice Cream", price: "$4.25"})
+# #=> #<item4...>
+#
+# pry(main)> vendor1 = Vendor.new("Rocky Mountain Fresh")
+# #=> #<vendor1...>
+
+#
+# pry(main)> vendor1.stock(item1, 35)
+#
+# pry(main)> vendor1.stock(item2, 7)
+#
+# pry(main)> vendor2 = Vendor.new("Ba-Nom-a-Nom")
+# #=> #<vendor2...>
+#
+# pry(main)> vendor2.stock(item4, 50)
+#
+# pry(main)> vendor2.stock(item3, 25)
+#
+# pry(main)> vendor3 = Vendor.new("Palisade Peach Shack")
+# #=> #<vendor3...>
+#
+# pry(main)> vendor3.stock(item1, 65)
+#
+# pry(main)> vendor3.stock(item3, 10)
+#
+# pry(main)> market.add_vendor(vendor1)
+#
+# pry(main)> market.add_vendor(vendor2)
+#
+# pry(main)> market.add_vendor(vendor3)
+#
+# pry(main)> market.total_inventory
+# #=> {
+#   #   #<item1...> => {
+#   #     quantity: 100,
+#   #     vendors: [#<vendor1...>, #<vendor3...>]
+#   #   },
+#   #   #<item2...> => {
+#   #     quantity: 7,
+#   #     vendors: [#<vendor1...>]
+#   #   },
+#   #   #<item4...> => {
+#   #     quantity: 50,
+#   #     vendors: [#<vendor2...>]
+#   #   },
+#   #   #<item3...> => {
+#   #     quantity: 35,
+#   #     vendors: [#<vendor2...>, #<vendor3...>]
+#   #   },
+#   # }
+#

@@ -21,4 +21,16 @@ class Market
     @vendors.select { |vendor| vendor.items_in_stock.include?(item.name) }
   end
 
+
+  def total_inventory
+    all_items.reduce({}) do |acc, item|
+      acc[item] = {
+                    quanity: total_quantity(item),
+                    vendors: vendors_that_sell(item)
+                  }
+      acc
+    end
+
+  end
+
 end
