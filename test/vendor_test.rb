@@ -27,29 +27,29 @@ class VendorTest < Minitest::Test
 
   def test_it_can_add_stock
     @vendor.stock(@item1, 30)
+
     assert_equal ({@item1 => 30}), @vendor.inventory
   end
 
+  def test_it_can_add_more_stock
+    @vendor.stock(@item1, 30)
+
+    assert_equal ({@item1 => 30}), @vendor.inventory
+
+    @vendor.stock(@item1, 25)
+
+    assert_equal 55, @vendor.check_stock(@item1)
+  end
+
+  def test_it_can_stock_multiple_items
+    @vendor.stock(@item1, 30)
+    @vendor.stock(@item1, 25)
+    @vendor.stock(@item2, 12)
+
+    assert_equal ({
+                    @item1 => 55,
+                    @item2 => 12
+                  }), @vendor.inventory
+  end
+
 end
-
-
-
-
-#
-# pry(main)> vendor.stock(item1, 30)
-#
-# pry(main)> vendor.inventory
-# #=> {#<Item:0x007f9c56740d48...> => 30}
-#
-# pry(main)> vendor.check_stock(item1)
-# #=> 30
-#
-# pry(main)> vendor.stock(item1, 25)
-#
-# pry(main)> vendor.check_stock(item1)
-# #=> 55
-#
-# pry(main)> vendor.stock(item2, 12)
-#
-# pry(main)> vendor.inventory
-# #=> {#<Item:0x007f9c56740d48...> => 55, #<Item:0x007f9c565c0ce8...> => 12}
