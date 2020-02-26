@@ -20,4 +20,8 @@ class Vendor
     items_with_stock = @inventory.select { |item_name, amount| amount > 0 }
     items_with_stock.keys.map { |item| item.name }
   end
+
+  def potential_revenue
+    @inventory.map { |item, amount| item.price * amount }.sum
+  end
 end
