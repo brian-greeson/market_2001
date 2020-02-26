@@ -73,9 +73,9 @@ class MarketTest < Minitest::Test
     @market.add_vendor(@vendor2)
     @market.add_vendor(@vendor3)
 
-    assert_equal 29.75, vendor1.potential_revenue
-    assert_equal 345.00, vendor2.potential_revenue
-    assert_equal 48.75, vendor3.potential_revenue
+    assert_equal 29.75, @vendor1.potential_revenue
+    assert_equal 345.00, @vendor2.potential_revenue
+    assert_equal 48.75, @vendor3.potential_revenue
   end
 
 end
