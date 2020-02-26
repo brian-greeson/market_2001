@@ -63,7 +63,7 @@ class VendorTest < Minitest::Test
     @vendor1.stock(@item1, 25)
     @vendor1.stock(@item2, 12)
 
-    expected_names = ['Peach', 'Tomato']
+    expected_names = [@item1, @item2]
 
     assert_equal expected_names, @vendor1.items_in_stock
   end

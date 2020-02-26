@@ -17,8 +17,8 @@ class Vendor
   end
 
   def items_in_stock
-    items_with_stock = @inventory.select { |item_name, amount| amount > 0 }
-    items_with_stock.keys.map { |item| item.name }
+    @inventory.select { |item_name, amount| amount > 0 }.keys
+
   end
 
   def potential_revenue
