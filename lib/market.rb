@@ -30,6 +30,10 @@ class Market
     all_items.sort
   end
 
+  def total_quantity(item)
+    @vendors.sum { |vendor| vendor.check_stock(item)}
+  end
+
 
 
   def total_inventory
