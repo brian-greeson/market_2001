@@ -21,6 +21,10 @@ class VendorTest < Minitest::Test
     assert_equal ({}), @vendor.inventory
   end
 
+  def test_it_non_stocked_items_have_stock_level_of_0
+    assert_equal 0, vendor.check_stock(item1)
+  end
+
 end
 
 
