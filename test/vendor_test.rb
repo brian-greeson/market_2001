@@ -52,4 +52,14 @@ class VendorTest < Minitest::Test
                   }), @vendor.inventory
   end
 
+  def test_it_can_list_names_of_items_in_stock
+    @vendor.stock(@item1, 30)
+    @vendor.stock(@item1, 25)
+    @vendor.stock(@item2, 12)
+
+    expected_names = ['Peach', 'Tomato']
+
+    assert_equal expected_names, @vendor.items_in_stock
+  end
+
 end
